@@ -86,8 +86,8 @@
 
 .fav-btn,
 .fav-btn-active {
-  padding: 16px 18px;
-  font-size: 1.1rem;
+  padding: 10px 12px;
+  font-size: 0.7rem;
   border-color: white;
   border: 1px solid;
   margin-top: 40px;
@@ -118,7 +118,7 @@
   .fav-btn,
   .fav-btn-active {
     padding: 6px 8px;
-    font-size: 0.8rem;
+    font-size: 0.6rem;
     margin-top: 20px;
   }
 
@@ -135,7 +135,7 @@
   .fav-btn,
   .fav-btn-active {
     padding: 6px 8px;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     margin-top: 14px;
   }
 
@@ -161,8 +161,8 @@
 @media (min-width: 1440px) {
   .fav-btn,
   .fav-btn-active {
-    font-size: 1.15rem;
-    padding: 20px 24px;
+    font-size: 1rem;
+    padding: 16px 20px;
   }
 
   .overlay-content hr {
