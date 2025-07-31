@@ -1,16 +1,17 @@
 import { useState, useEffect } from "react";
 
-export default function useFavourite(photo) {
+export default function useFavourite(photo, favouritesList = null) {
   const [isFavourited, setIsFavourited] = useState(false);
+
   function getStoredPhotos() {
     return JSON.parse(localStorage.getItem("likedPhotos")) || [];
   }
 
   useEffect(() => {
-    const stored = getStoredPhotos();
+    const stored = favouritesList || getStoredPhotos();
     const isLiked = stored.some((item) => item.id === photo.id);
     setIsFavourited(isLiked);
-  }, [photo.id]);
+  }, [photo.id, favouritesList]);
 
   function handleFav() {
     const stored = getStoredPhotos();

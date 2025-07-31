@@ -17,10 +17,11 @@ function App() {
       {popUp && (
         <FavouritesPopUp
           favourites={favourites}
+          setFavourites={setFavourites}
           onClose={() => setPopUp(false)}
         />
       )}
-      <Gallery handleOpenPopUp={handleOpenPopUp} />
+      <Gallery handleOpenPopUp={handleOpenPopUp} favourites={favourites} />
     </>
   );
 }
