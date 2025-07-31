@@ -1,7 +1,19 @@
 import { createPortal } from "react-dom";
+import ImageCard from "../ImageCard/ImageCard.jsx";
 import "./FavouritesPopUp.css";
 
-export default function FavouritesPopUp({ favourites, onClose }) {
+export default function FavouritesPopUp({
+  favourites,
+  setFavourites,
+  onClose,
+}) {
+  const handleRemove = (id) => {
+    const updated = favourites.filter((photo) => photo.id !== id);
+    setFavourites(updated);
+
+    localStorage.setItem("likedPhotos", JSON.stringify(updated));
+  };
+
   return createPortal(
     <div className="popup-backdrop" onClick={onClose}>
       <div
@@ -25,12 +37,11 @@ export default function FavouritesPopUp({ favourites, onClose }) {
             <p>No favourites yet</p>
           ) : (
             favourites.map((photo) => (
-              <img
+              <ImageCard
                 key={photo.id}
-                src={photo.src.large}
-                alt={photo.alt}
-                className="popup-image"
-                loading="lazy"
+                photo={photo}
+                hideFavouriteButton
+                onRemove={() => handleRemove(photo.id)}
               />
             ))
           )}

@@ -1,8 +1,13 @@
 import "./ImageCard.css";
 import useFavourite from "../../hooks/useFavourite";
 
-export default function ImageCard({ photo }) {
-  const { isFavourited, handleFav } = useFavourite(photo);
+export default function ImageCard({
+  photo,
+  hideFavouriteButton = false,
+  onRemove,
+  favouritesList,
+}) {
+  const { isFavourited, handleFav } = useFavourite(photo, favouritesList);
   return (
     <>
       <div className="image-card">
@@ -15,12 +20,18 @@ export default function ImageCard({ photo }) {
               <p className="photo-photographer">{photo.photographer}</p>
             </div>
             <div className="button-wrapper">
-              <button
-                className={isFavourited ? "fav-btn-active" : "fav-btn"}
-                onClick={handleFav}
-              >
-                {isFavourited ? "Favourited" : "Favourite"}
-              </button>
+              {!hideFavouriteButton ? (
+                <button
+                  className={isFavourited ? "fav-btn-active" : "fav-btn"}
+                  onClick={handleFav}
+                >
+                  {isFavourited ? "Favourited" : "Favourite"}
+                </button>
+              ) : onRemove ? (
+                <button className="remove-btn" onClick={onRemove}>
+                  Remove
+                </button>
+              ) : null}
             </div>
           </div>
         </div>

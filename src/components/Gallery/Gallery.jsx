@@ -5,7 +5,7 @@ import ImageCard from "../ImageCard/ImageCard";
 import NavBar from "../NavBar/NavBar";
 import "./Gallery.css";
 
-export default function Gallery({ handleOpenPopUp }) {
+export default function Gallery({ handleOpenPopUp, favourites }) {
   const [page, setPage] = useState(1);
   const [query, setQuery] = useState("");
   const [inputValue, setInputValue] = useState("");
@@ -48,7 +48,7 @@ export default function Gallery({ handleOpenPopUp }) {
           </p>
         )}
         {data.map((photo) => (
-          <ImageCard key={photo.id} photo={photo} />
+          <ImageCard key={photo.id} photo={photo} favouritesList={favourites} />
         ))}
       </div>
     </>
