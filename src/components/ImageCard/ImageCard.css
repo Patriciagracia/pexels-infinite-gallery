@@ -85,11 +85,12 @@
 }
 
 .fav-btn,
-.fav-btn-active {
+.fav-btn-active,
+.remove-btn {
   padding: 10px 12px;
   font-size: 0.7rem;
   border-color: white;
-  border: 1px solid;
+  border: 1px solid white;
   margin-top: 40px;
   cursor: pointer;
   border-radius: 50px;
