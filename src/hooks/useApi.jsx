@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
-import { createClient } from "pexels";
 
 export default function useApi(page, query) {
-  const apiKey = "H7x3rkG5xV4QIRVsz5zIu115eAfK8IjqfELhvLJHU2J7E6KUbQ71Mguq";
-  const client = createClient(apiKey);
+  const apiKey = import.meta.env.VITE_PEXELS_API;
 
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -18,13 +16,27 @@ export default function useApi(page, query) {
       setIsLoading(true);
       setError(null);
 
+      const endpoint = query
+        ? `https://api.pexels.com/v1/search?query=${encodeURIComponent(
+            query
+          )}&per_page=16&page=${page}`
+        : `https://api.pexels.com/v1/curated?per_page=16&page=${page}`;
+
       try {
-        const response = query
-          ? await client.photos.search({ query, per_page: 16, page })
-          : await client.photos.curated({ per_page: 16, page });
+        const response = await fetch(endpoint, {
+          headers: {
+            Authorization: apiKey,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error(`API responded with status ${response.status}`);
+        }
+
+        const result = await response.json();
 
         setData((prev) => {
-          const newPhotos = response.photos.filter((newPhoto) => {
+          const newPhotos = result.photos.filter((newPhoto) => {
             return !prev.some(
               (existingPhoto) => existingPhoto.id === newPhoto.id
             );
@@ -40,7 +52,7 @@ export default function useApi(page, query) {
     };
 
     fetchData();
-  }, [page, query]);
+  }, [page, query, apiKey]);
 
   return { data, isLoading, error };
 }
