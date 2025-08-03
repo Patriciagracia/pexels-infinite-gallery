@@ -26,10 +26,6 @@ npm run dev
 
 Task planning was done in Trello, where I broke down the work into key steps: starting with the API integration, building the gallery that displays the images, then implementing infinite scroll, and finally building the favourites system. I also considered several extra features to improve usability, including an image search bar and a dedicated pop-up window to display the user's favourites.
 
-### Example: Infinite Scroll in Action
-
-![Infinite scroll demo](Search-scroll.gif)
-
 ### Example: Adding to Favourites
 
 ![Favouriting demo](favouriting.gif)
